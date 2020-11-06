@@ -10,6 +10,9 @@
         <e p="Death Monopoly" t="Include">
           <e p="Scripts" t="Include">
             <e p="Generators.cs" t="Include" />
+            <e p="PhysicsForTiles" t="Include">
+              <e p="Springboard.cs" t="Include" />
+            </e>
             <e p="TileConnector.cs" t="Include" />
             <e p="TileModule.cs" t="Include" />
           </e>
