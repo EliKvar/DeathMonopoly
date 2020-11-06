@@ -38,7 +38,19 @@ namespace Photon.Pun.Demo.PunBasics
 
         [Tooltip("The prefab to use for representing the player")]
         [SerializeField]
-        private GameObject playerPrefab;
+        private GameObject player1Prefab;
+		[SerializeField]
+		private GameObject player2Prefab;
+		[SerializeField]
+		private GameObject player3Prefab;
+		[SerializeField]
+		private GameObject player4Prefab;
+		[SerializeField]
+		private GameObject player5Prefab;
+
+		private GameObject playerPrefab;
+		private string playerprefStr;
+		
 
         #endregion
 
@@ -49,8 +61,32 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         void Start()
 		{
+			playerprefStr = PlayerPrefs.GetString("Player");
+			Debug.Log(playerprefStr);
+			
+			switch (playerprefStr)
+            {
+				case "Player1":
+					playerPrefab = player1Prefab;
+					break;
+				case "Player2":
+					playerPrefab = player2Prefab;
+					break;
+				case "Player3":
+					playerPrefab = player3Prefab;
+					break;
+				case "Player4":
+					playerPrefab = player4Prefab;
+					break;
+				case "Player5":
+					playerPrefab = player5Prefab;
+					break;
+				default:
+					playerPrefab = player1Prefab;
+					break;
+			}
 			Instance = this;
-
+		
 			// in case we started this demo with the wrong scene being active, simply load the menu scene
 			if (!PhotonNetwork.IsConnected)
 			{
@@ -109,7 +145,7 @@ namespace Photon.Pun.Demo.PunBasics
 			{
 				Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
 
-				LoadArena();
+				//LoadArena();
 			}
 		}
 
@@ -125,7 +161,7 @@ namespace Photon.Pun.Demo.PunBasics
 			{
 				Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
 
-				LoadArena(); 
+				//LoadArena(); 
 			}
 		}
 

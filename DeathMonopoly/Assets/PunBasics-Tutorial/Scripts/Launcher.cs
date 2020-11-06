@@ -23,6 +23,7 @@ namespace Photon.Pun.Demo.PunBasics
 	public class Launcher : MonoBehaviourPunCallbacks
     {
 
+		public bool playerSelection = false;
 		#region Private Serializable Fields
 
 		[Tooltip("The Ui Panel to let the user enter name, connect and play")]
@@ -86,36 +87,76 @@ namespace Photon.Pun.Demo.PunBasics
 		/// - If already connected, we attempt joining a random room
 		/// - if not yet connected, Connect this application instance to Photon Cloud Network
 		/// </summary>
+		
+		public void SetPlayer1()
+        {
+			PlayerPrefs.SetString("Player", "Player1");
+			feedbackText.text = "Boot Selected";
+			playerSelection = true;
+		}
+		public void SetPlayer2()
+		{
+			PlayerPrefs.SetString("Player", "Player2");
+			feedbackText.text = "Car Selected";
+			playerSelection = true;
+		}
+		public void SetPlayer3()
+		{
+			PlayerPrefs.SetString("Player", "Player3");
+			feedbackText.text = "Hat Selected";
+			playerSelection = true;
+		}
+		public void SetPlayer4()
+		{
+			PlayerPrefs.SetString("Player", "Player4");
+			feedbackText.text = "Iron Selected";
+			playerSelection = true;
+		}
+		public void SetPlayer5()
+		{
+			PlayerPrefs.SetString("Player", "Player5");
+			feedbackText.text = "Wheelbarrow Selected";
+			playerSelection = true;
+		}
 		public void Connect()
 		{
 			// we want to make sure the log is clear everytime we connect, we might have several failed attempted if connection failed.
 			feedbackText.text = "";
-
-			// keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
-			isConnecting = true;
-
-			// hide the Play button for visual consistency
-			controlPanel.SetActive(false);
-
-			// start the loader animation for visual effect.
-			if (loaderAnime!=null)
+			if (playerSelection == false)
 			{
-				loaderAnime.StartLoaderAnimation();
+				LogFeedback("Please select a Player");
 			}
-
-			// we check if we are connected or not, we join if we are , else we initiate the connection to the server.
-			if (PhotonNetwork.IsConnected)
+			else
 			{
-				LogFeedback("Joining Room...");
-				// #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
-				PhotonNetwork.JoinRandomRoom();
-			}else{
-
-				LogFeedback("Connecting...");
 				
-				// #Critical, we must first and foremost connect to Photon Online Server.
-				PhotonNetwork.ConnectUsingSettings();
-                PhotonNetwork.GameVersion = this.gameVersion;
+				// keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
+				isConnecting = true;
+
+				// hide the Play button for visual consistency
+				controlPanel.SetActive(false);
+
+				// start the loader animation for visual effect.
+				if (loaderAnime != null)
+				{
+					loaderAnime.StartLoaderAnimation();
+				}
+
+				// we check if we are connected or not, we join if we are , else we initiate the connection to the server.
+				if (PhotonNetwork.IsConnected)
+				{
+					LogFeedback("Joining Room...");
+					// #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
+					PhotonNetwork.JoinRandomRoom();
+				}
+				else
+				{
+
+					LogFeedback("Connecting...");
+
+					// #Critical, we must first and foremost connect to Photon Online Server.
+					PhotonNetwork.ConnectUsingSettings();
+					PhotonNetwork.GameVersion = this.gameVersion;
+				}
 			}
 		}
 

@@ -77,7 +77,7 @@ namespace Photon.Pun.Demo.PunBasics
 
 			// only follow is explicitly declared
 			if (isFollowing) {
-				Follow ();
+				Cut ();
 			}
 		}
 
@@ -110,8 +110,10 @@ namespace Photon.Pun.Demo.PunBasics
 			cameraOffset.y = height;
 			
 		    cameraTransform.position = Vector3.Lerp(cameraTransform.position, this.transform.position +this.transform.TransformVector(cameraOffset), smoothSpeed*Time.deltaTime);
+			//cameraTransform.position = this.transform.position ;
 
-		    cameraTransform.LookAt(this.transform.position + centerOffset);
+
+			cameraTransform.LookAt(this.transform.position + centerOffset);
 		    
 	    }
 

@@ -33,7 +33,7 @@ namespace Photon.Pun.Demo.PunBasics
 
 	    [Tooltip("UI Slider to display Player's Health")]
 	    [SerializeField]
-	    private Slider playerHealthSlider;
+	   // private Slider playerHealthSlider;
 
         PlayerManager target;
 
@@ -76,9 +76,9 @@ namespace Photon.Pun.Demo.PunBasics
 
 
 			// Reflect the Player Health
-			if (playerHealthSlider != null) {
-				playerHealthSlider.value = target.Health;
-			}
+			//if (playerHealthSlider != null) {
+			//	playerHealthSlider.value = target.Health;
+			//}
 		}
 
 		/// <summary>
@@ -104,8 +104,6 @@ namespace Photon.Pun.Demo.PunBasics
 			}
 
 		}
-
-
 
 
 		#endregion

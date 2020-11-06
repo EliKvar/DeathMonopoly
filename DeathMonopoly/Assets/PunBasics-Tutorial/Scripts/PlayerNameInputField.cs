@@ -65,7 +65,7 @@ namespace Photon.Pun.Demo.PunBasics
 		        return;
 		    }
 			PhotonNetwork.NickName = value;
-
+			
 			PlayerPrefs.SetString(playerNamePrefKey, value);
 		}
 		

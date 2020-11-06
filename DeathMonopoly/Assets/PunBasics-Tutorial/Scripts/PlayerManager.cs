@@ -22,9 +22,15 @@ namespace Photon.Pun.Demo.PunBasics
     public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         #region Public Fields
+        public float turnSmoothTime = 2f;
+        float turnSmoothVelocity;
+        float turnspeed = 200.0f;
 
-        [Tooltip("The current Health of our player")]
-        public float Health = 1f;
+        private Vector3 inputVector;
+        Rigidbody rb;
+        float speed = 9f;
+        // [Tooltip("The current Health of our player")]
+        // public float Health = 1f;
 
         [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
         public static GameObject LocalPlayerInstance;
@@ -37,12 +43,12 @@ namespace Photon.Pun.Demo.PunBasics
         [SerializeField]
         private GameObject playerUiPrefab;
 
-        [Tooltip("The Beams GameObject to control")]
-        [SerializeField]
-        private GameObject beams;
+        //[Tooltip("The Beams GameObject to control")]
+        //[SerializeField]
+        //private GameObject beams;
 
         //True, when the user is firing
-        bool IsFiring;
+        //bool IsFiring;
 
         #endregion
 
@@ -53,14 +59,14 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         public void Awake()
         {
-            if (this.beams == null)
-            {
-                Debug.LogError("<Color=Red><b>Missing</b></Color> Beams Reference.", this);
-            }
-            else
-            {
-                this.beams.SetActive(false);
-            }
+           // if (this.beams == null)
+          //  {
+          //      Debug.LogError("<Color=Red><b>Missing</b></Color> Beams Reference.", this);
+          //  }
+          //  else
+          //  {
+          //      this.beams.SetActive(false);
+          //  }
 
             // #Important
             // used in GameManager.cs: we keep track of the localPlayer instance to prevent instanciation when levels are synchronized
@@ -80,6 +86,7 @@ namespace Photon.Pun.Demo.PunBasics
         public void Start()
         {
             CameraWork _cameraWork = gameObject.GetComponent<CameraWork>();
+            rb = GetComponent<Rigidbody>();
 
             if (_cameraWork != null)
             {
@@ -135,16 +142,17 @@ namespace Photon.Pun.Demo.PunBasics
             {
                 this.ProcessInputs();
 
-                if (this.Health <= 0f)
-                {
-                    GameManager.Instance.LeaveRoom();
-                }
+               // if (this.Health <= 0f)
+               // {
+               //     GameManager.Instance.LeaveRoom();
+               // }
             }
 
-            if (this.beams != null && this.IsFiring != this.beams.activeInHierarchy)
-            {
-                this.beams.SetActive(this.IsFiring);
-            }
+            // if (this.beams != null && this.IsFiring != this.beams.activeInHierarchy)
+            // {
+            //     this.beams.SetActive(this.IsFiring);
+            // }
+       
         }
 
         /// <summary>
@@ -163,12 +171,12 @@ namespace Photon.Pun.Demo.PunBasics
 
             // We are only interested in Beamers
             // we should be using tags but for the sake of distribution, let's simply check by name.
-            if (!other.name.Contains("Beam"))
-            {
-                return;
-            }
+           // if (!other.name.Contains("Beam"))
+           // {
+           //     return;
+           // }
 
-            this.Health -= 0.1f;
+           // this.Health -= 0.1f;
         }
 
         /// <summary>
@@ -186,13 +194,13 @@ namespace Photon.Pun.Demo.PunBasics
 
             // We are only interested in Beamers
             // we should be using tags but for the sake of distribution, let's simply check by name.
-            if (!other.name.Contains("Beam"))
-            {
-                return;
-            }
+           // if (!other.name.Contains("Beam"))
+           // {
+           //     return;
+           // }
 
             // we slowly affect health when beam is constantly hitting us, so player has to move to prevent death.
-            this.Health -= 0.1f*Time.deltaTime;
+           // this.Health -= 0.1f*Time.deltaTime;
         }
 
 
@@ -240,28 +248,53 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         void ProcessInputs()
         {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                // we don't want to fire when we interact with UI buttons for example. IsPointerOverGameObject really means IsPointerOver*UI*GameObject
-                // notice we don't use on on GetbuttonUp() few lines down, because one can mouse down, move over a UI element and release, which would lead to not lower the isFiring Flag.
-                if (EventSystem.current.IsPointerOverGameObject())
-                {
-                    //	return;
-                }
+            float x = Input.GetAxisRaw("Horizontal");
+            float z = Input.GetAxisRaw("Vertical");
+            //inputVector = new Vector3(x * speed, rb.velocity.y, z * speed);
 
-                if (!this.IsFiring)
-                {
-                    this.IsFiring = true;
-                }
-            }
-
-            if (Input.GetButtonUp("Fire1"))
+            /*
+            inputVector = new Vector3(x * speed, rb.velocity.y, z * speed);
+            Vector3 direction = new Vector3(x, 0, z).normalized;
+            // transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
+            if (direction.magnitude >= 0.1f)
             {
-                if (this.IsFiring)
-                {
-                    this.IsFiring = false;
-                }
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
             }
+           */
+            //rb.velocity = inputVector;
+
+            transform.Rotate(Vector3.up * turnspeed * x * Time.deltaTime);
+            transform.Translate(0f, 0f, speed * z * Time.deltaTime);
+
+           // Vector3 moveBy = transform.right * x + transform.forward * z;
+
+            //rb.MovePosition(transform.position + moveBy.normalized * speed * Time.deltaTime);
+            // if (Input.GetButtonDown("Fire1"))
+            // {
+            // we don't want to fire when we interact with UI buttons for example. IsPointerOverGameObject really means IsPointerOver*UI*GameObject
+            // notice we don't use on on GetbuttonUp() few lines down, because one can mouse down, move over a UI element and release, which would lead to not lower the isFiring Flag.
+            //  if (EventSystem.current.IsPointerOverGameObject())
+            //  {
+            //   //	return;
+            //  }
+
+            // if (!this.IsFiring)
+            //  {
+            //     this.IsFiring = true;
+            //  }
+            //}
+
+            // if (Input.GetButtonUp("Fire1"))
+            // {
+            //    if (this.IsFiring)
+            //    {
+            //        this.IsFiring = false;
+            //   }
+            // }
         }
 
         #endregion
@@ -273,14 +306,14 @@ namespace Photon.Pun.Demo.PunBasics
             if (stream.IsWriting)
             {
                 // We own this player: send the others our data
-                stream.SendNext(this.IsFiring);
-                stream.SendNext(this.Health);
+               // stream.SendNext(this.IsFiring);
+               // stream.SendNext(this.Health);
             }
             else
             {
                 // Network player, receive data
-                this.IsFiring = (bool)stream.ReceiveNext();
-                this.Health = (float)stream.ReceiveNext();
+               // this.IsFiring = (bool)stream.ReceiveNext();
+               // this.Health = (float)stream.ReceiveNext();
             }
         }
 

@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Death Monopoly/Scenes/GeneratorsTest.unity
+- path: Assets/PunBasics-Tutorial/Scenes/PunBasics-Launcher.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
