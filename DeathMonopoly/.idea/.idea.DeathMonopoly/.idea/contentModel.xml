@@ -367,10 +367,12 @@
         </e>
         <e p="PunBasics-Tutorial" t="Include">
           <e p="Scripts" t="Include">
+            <e p="CameraFollow.cs" t="Include" />
             <e p="CameraWork.cs" t="Include" />
             <e p="GameManager.cs" t="Include" />
             <e p="Launcher.cs" t="Include" />
             <e p="LoaderAnime.cs" t="Include" />
+            <e p="Pendulum.cs" t="Include" />
             <e p="PlayerAnimatorManager.cs" t="Include" />
             <e p="PlayerManager.cs" t="Include" />
             <e p="PlayerNameInputField.cs" t="Include" />

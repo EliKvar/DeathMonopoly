@@ -8,8 +8,10 @@
 // <author>developer@exitgames.com</author>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 namespace Photon.Pun.Demo.PunBasics
 {
@@ -183,6 +185,15 @@ namespace Photon.Pun.Demo.PunBasics
                 rb.AddForce(newDir * 3, ForceMode.Impulse);
               
             }
+           
+           if (other.tag.Contains("Springboard"))
+           {
+               Debug.Log("Springboard Hit");
+
+               Vector3 newDir = new Vector3(0, Random.Range(5, 10), 0);
+               rb.AddForce(newDir * 3, ForceMode.Impulse);
+              
+           }
             // this.Health -= 0.1f;
         }
 
@@ -210,8 +221,17 @@ namespace Photon.Pun.Demo.PunBasics
            // this.Health -= 0.1f*Time.deltaTime;
         }
 
+        public void OnTriggerExit(Collider other)
+        {
+            if (!photonView.IsMine)
+            {
+                return;
+            }
+            
+        }
 
-        #if !UNITY_5_4_OR_NEWER
+
+#if !UNITY_5_4_OR_NEWER
         /// <summary>See CalledOnLevelWasLoaded. Outdated in Unity 5.4.</summary>
         void OnLevelWasLoaded(int level)
         {
