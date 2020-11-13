@@ -535,6 +535,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11476684, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
+      propertyPath: Tiles.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11476684, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
       propertyPath: player1Prefab
       value: 
       objectReference: {fileID: 4033746856980466012, guid: 784d9ad1bfb5142458f23b5207d366ba,
@@ -558,6 +562,49 @@ PrefabInstance:
       propertyPath: player5Prefab
       value: 
       objectReference: {fileID: 6116091026104885983, guid: 035cdd5c1ac2acd4fb69a8420f75a747,
+        type: 3}
+    - target: {fileID: 11476684, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
+      propertyPath: gen
+      value: 
+      objectReference: {fileID: 1799871817}
+    - target: {fileID: 11476684, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
+      propertyPath: CornerTile
+      value: 
+      objectReference: {fileID: 2848496678254351533, guid: 0b81a5c0f6f8d5d41aadec0e216dd7eb,
+        type: 3}
+    - target: {fileID: 11476684, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
+      propertyPath: StartTile
+      value: 
+      objectReference: {fileID: 8848953207900564616, guid: c4ef67d2ef6aa8d4e891e2dc8ffa0ac8,
+        type: 3}
+    - target: {fileID: 11476684, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
+      propertyPath: TileGenerations
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 11476684, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
+      propertyPath: Tiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 5021655460670434046, guid: c2a9d923f7a916849bb24bde408cbff9,
+        type: 3}
+    - target: {fileID: 11476684, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
+      propertyPath: Tiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 6608262805072600887, guid: a0a78f6e1622e8744ad78d447c1a1cba,
+        type: 3}
+    - target: {fileID: 11476684, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
+      propertyPath: Tiles.Array.data[2]
+      value: 
+      objectReference: {fileID: -4337992206616855146, guid: 4169edaa55ea73b4a84af298a1c64ff6,
+        type: 3}
+    - target: {fileID: 11476684, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
+      propertyPath: Tiles.Array.data[3]
+      value: 
+      objectReference: {fileID: -733019151593571126, guid: 57398223dc957c04a8411bc853cb2c2a,
+        type: 3}
+    - target: {fileID: 11476684, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
+      propertyPath: Tiles.Array.data[4]
+      value: 
+      objectReference: {fileID: 3885286140158390498, guid: 7599f2930c0ff1a46b4133f38cececb2,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7fe671fa5d4d4772a4b20715fb9b0ff, type: 3}
@@ -962,7 +1009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1799871818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -976,11 +1023,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tiles:
-  - {fileID: 3546200013875065737, guid: 4ed87f95f9712a44892fb962f1400479, type: 3}
-  - {fileID: 5309766968105713097, guid: 0ac4e3a5d803f424aaf68c3e6bb55d81, type: 3}
-  - {fileID: 4668034600998997618, guid: 6a900895a11823d4fbc1f15afbb8fee0, type: 3}
-  - {fileID: 8571953242671593057, guid: c67660fc56c7bf747b1426938de9d346, type: 3}
-  - {fileID: 2626271874271723289, guid: ac7ebb2e151da434b96dc4e08210d294, type: 3}
+  - {fileID: 5021655460670434046, guid: c2a9d923f7a916849bb24bde408cbff9, type: 3}
+  - {fileID: 6608262805072600887, guid: a0a78f6e1622e8744ad78d447c1a1cba, type: 3}
+  - {fileID: -4337992206616855146, guid: 4169edaa55ea73b4a84af298a1c64ff6, type: 3}
+  - {fileID: -733019151593571126, guid: 57398223dc957c04a8411bc853cb2c2a, type: 3}
+  - {fileID: 3885286140158390498, guid: 7599f2930c0ff1a46b4133f38cececb2, type: 3}
   StartTile: {fileID: 8848953207900564616, guid: c4ef67d2ef6aa8d4e891e2dc8ffa0ac8,
     type: 3}
   CornerTile: {fileID: 2848496678254351533, guid: 0b81a5c0f6f8d5d41aadec0e216dd7eb,

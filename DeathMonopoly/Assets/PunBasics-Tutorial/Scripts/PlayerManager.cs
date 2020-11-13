@@ -25,7 +25,7 @@ namespace Photon.Pun.Demo.PunBasics
         public float turnSmoothTime = 2f;
         float turnSmoothVelocity;
         float turnspeed = 200.0f;
-
+       
         private Vector3 inputVector;
         Rigidbody rb;
         float speed = 9f;
@@ -152,7 +152,7 @@ namespace Photon.Pun.Demo.PunBasics
             // {
             //     this.beams.SetActive(this.IsFiring);
             // }
-       
+    
         }
 
         /// <summary>
@@ -175,8 +175,15 @@ namespace Photon.Pun.Demo.PunBasics
            // {
            //     return;
            // }
+           if (other.tag.Contains("Axe"))
+            {
+                Debug.Log("Axe Hit");
 
-           // this.Health -= 0.1f;
+                Vector3 newDir = new Vector3(Random.Range(-5, 5), Random.Range(1, 7), Random.Range(-5,5));
+                rb.AddForce(newDir * 3, ForceMode.Impulse);
+              
+            }
+            // this.Health -= 0.1f;
         }
 
         /// <summary>

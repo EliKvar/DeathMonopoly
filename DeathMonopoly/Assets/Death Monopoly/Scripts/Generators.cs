@@ -12,9 +12,10 @@ public class Generators : MonoBehaviour
     public TileModule CornerTile;
 
     public int TileGenerations;
-
-    private void Start()
+  
+    public void Generate()
     {
+        Debug.Log("GENERATING");
         //Start off by spawning the starting piece
         var start = Instantiate(StartTile, transform.position, transform.rotation);
         var pendExits = new List<TileConnector>(start.GetExitsForTile());
