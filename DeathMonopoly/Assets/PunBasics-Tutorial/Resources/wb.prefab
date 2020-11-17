@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5538423064602973699}
   - component: {fileID: -1440685390686603444}
   - component: {fileID: 6405345491959052816}
-  - component: {fileID: 3316411329403707323}
   - component: {fileID: -3556147308996552078}
   - component: {fileID: 5268768458445474134}
   - component: {fileID: -6745000767353866643}
@@ -115,24 +114,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.010000001, y: 0.07587278, z: 0.0138160195}
   m_Center: {x: 0, y: 0.016784241, z: 0.00022696424}
---- !u!143 &3316411329403707323
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6116091026104885983}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 0.109441265
-  m_Radius: 0.007134974
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-3556147308996552078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,4 +183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSmoothTime: 0.1
+  winText: {fileID: 0}
+  loseText: {fileID: 0}
   playerUiPrefab: {fileID: 170056, guid: e41946a981c3b444a84d15eb7c608ca4, type: 3}
+  startPoint: {fileID: 5654982829403511690, guid: c4ef67d2ef6aa8d4e891e2dc8ffa0ac8,
+    type: 3}

@@ -38,7 +38,9 @@ namespace Photon.Pun.Demo.PunBasics
 		public TileModule[] Tiles;
 		public TileModule StartTile;
 		public TileModule CornerTile;
+		public TileModule EndTile;
 		public int TileGenerations;
+		public GameObject EndPiece;
 
 		#region Private Fields
 
@@ -59,6 +61,7 @@ namespace Photon.Pun.Demo.PunBasics
 		private GameObject playerPrefab;
 		private string playerprefStr;
 
+		
 
 		#endregion
 
@@ -69,7 +72,7 @@ namespace Photon.Pun.Demo.PunBasics
 		/// </summary>
 		void Start()
 		{
-
+			
 			playerprefStr = PlayerPrefs.GetString("Player");
 			Debug.Log(playerprefStr);
 
@@ -123,6 +126,7 @@ namespace Photon.Pun.Demo.PunBasics
 			
 					
 					PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+
 					Generate();
 
 					if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
@@ -152,6 +156,7 @@ namespace Photon.Pun.Demo.PunBasics
 			{
 				QuitApplication();
 			}
+			
 		}
 
 		#endregion
@@ -165,7 +170,7 @@ namespace Photon.Pun.Demo.PunBasics
 		public override void OnPlayerEnteredRoom(Player other)
 		{
 			Debug.Log("OnPlayerEnteredRoom() " + other.NickName); // not seen if you're the player connecting
-
+			
 			if (PhotonNetwork.IsMasterClient)
 			{
 				Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
@@ -189,7 +194,7 @@ namespace Photon.Pun.Demo.PunBasics
 				//LoadArena(); 
 			}
 		}
-
+        
 		/// <summary>
 		/// Called when the local player left the room. We need to load the launcher scene.
 		/// </summary>
@@ -282,6 +287,16 @@ namespace Photon.Pun.Demo.PunBasics
 						newExit.AddRange(newTileExits.Where(e => e != exitMatch));
 						Debug.Log("Corner 3 Tile Placed " + Mathf.Round(0.25f * TileGenerations));
 					}
+					else if(gens == TileGenerations && pendExits.Count > 0 && gens == Mathf.Round(1 * TileGenerations))
+                    {
+
+						newTile = Instantiate(EndTile);
+						newTileExits = newTile.GetExitsForTile();
+						exitMatch = newTileExits.FirstOrDefault(x => x.IsDefault) ?? GetRandom(newTileExits);
+						MatchExit(pendExit, exitMatch);
+						newExit.AddRange(newTileExits.Where(e => e != exitMatch));
+						Debug.Log("End tile placed");
+					}
 					//The rest of the tiles
 					else
 					{
@@ -298,7 +313,7 @@ namespace Photon.Pun.Demo.PunBasics
 
 							Debug.Log("Tile Placed");
 						}
-						else
+						else 
 						{
 							Debug.Log("Tiles not available");
 						}

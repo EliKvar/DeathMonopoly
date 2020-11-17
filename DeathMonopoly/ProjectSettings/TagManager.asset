@@ -7,6 +7,12 @@ TagManager:
   - Axe
   - Bullet
   - Springboard
+  - Void
+  - Start
+  - End
+  - Checkpoint
+  - Hippo
+  - RevealCollider
   layers:
   - Default
   - TransparentFX
