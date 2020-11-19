@@ -256,7 +256,7 @@ namespace Photon.Pun.Demo.PunBasics
 
 				// #Critical
 				// Load the Room Level. 
-				PhotonNetwork.LoadLevel("PunBasics-Room for 1");
+				PhotonNetwork.LoadLevel("Random1");
 				
 				
 			}

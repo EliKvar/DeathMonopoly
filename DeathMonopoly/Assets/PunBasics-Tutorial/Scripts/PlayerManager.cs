@@ -213,7 +213,7 @@ namespace Photon.Pun.Demo.PunBasics
                 //Renderer temp = other.GetComponent<Renderer>();
                // temp.enabled = true;
                 Vector3 newDir = new Vector3(Random.Range(-5, 5), Random.Range(1, 7), Random.Range(-5,5));
-                rb.AddForce(newDir * 3, ForceMode.Impulse);
+                rb.AddForce(newDir * 2, ForceMode.Impulse);
               
             }
            
@@ -221,10 +221,21 @@ namespace Photon.Pun.Demo.PunBasics
            {
                Debug.Log("Springboard Hit");
 
-               Vector3 newDir = new Vector3(0, Random.Range(5, 10), 0);
-               rb.AddForce(newDir * 3, ForceMode.Impulse);
-              
-           }
+               Vector3 newDir = new Vector3(Random.Range(-3, 3), Random.Range(5, 10), Random.Range(-3, 3));
+               rb.AddForce(newDir * 1, ForceMode.Impulse);
+                foreach (Transform child in other.gameObject.transform)
+                {
+                    if (child.name == "redChecker (1)")
+                    {
+                        Debug.Log("SPRING");
+
+                        GameObject obj = child.gameObject;
+                        obj.GetComponent<Renderer>().enabled = true;
+                    }
+                   
+                }
+
+            }
             if (other.tag.Contains("Void"))
             {
                 Respawn(currentCheckpoint);
@@ -244,20 +255,29 @@ namespace Photon.Pun.Demo.PunBasics
                 Debug.Log("Reveal");
                 foreach (Transform child in other.gameObject.transform)
                 { 
-                    if(child.name == "Axe")
-                    {
-                        GameObject ob = child.gameObject;
-                        ob.GetComponent<Renderer>().enabled = true;
-                    }
+                    
                     foreach(Transform chil in child.gameObject.transform)
                     {
-                        foreach(Transform chi in chil.gameObject.transform)
+                        if (chil.name == "Axe")
+                        {
+                            GameObject ob = chil.gameObject;
+                            ob.GetComponent<Renderer>().enabled = true;
+                        }
+                        foreach (Transform chi in chil.gameObject.transform)
                         {
                             if (chi.name == "pSphere6" || chi.name == "pCone10")
                             {
                                 Debug.Log(chi.name);
                                 GameObject obj = chi.gameObject;
                                 obj.GetComponent<Renderer>().enabled = true;
+                            }
+                            foreach(Transform ch in chi.gameObject.transform)
+                            {
+                                if(ch.name == "pCylinder14")
+                                {
+                                    GameObject o = ch.gameObject;
+                                    o.GetComponent<Renderer>().enabled = true;
+                                }
                             }
                         }
                     }
@@ -307,24 +327,43 @@ namespace Photon.Pun.Demo.PunBasics
             {
                 return;
             }
+            if (other.tag.Contains("Springboard"))
+            {
+                foreach (Transform child in other.gameObject.transform)
+                {
+                    if (child.name == "redChecker (1)")
+                    {
+                        GameObject obj = child.gameObject;
+                        obj.GetComponent<Renderer>().enabled = false;
+                    }
+                }
+            }
             if (other.tag.Contains("RevealCollider"))
             {
                 Debug.Log("Reveal");
                 foreach (Transform child in other.gameObject.transform)
                 {
-                    if(child.name == "Axe")
-                    {
-                        GameObject ob = child.gameObject;
-                        ob.GetComponent<Renderer>().enabled = false;
-                    }
                     foreach (Transform chil in child.gameObject.transform)
                     {
+                        if (chil.name == "Axe")
+                        {
+                            GameObject ob = chil.gameObject;
+                            ob.GetComponent<Renderer>().enabled = false;
+                        }
                         foreach (Transform chi in chil.gameObject.transform)
                         {
                             if (chi.name == "pSphere6" || chi.name == "pCone10")
                             {
                                 GameObject obj = chi.gameObject;
                                 obj.GetComponent<Renderer>().enabled = false;
+                            }
+                            foreach (Transform ch in chi.gameObject.transform)
+                            {
+                                if (ch.name == "pCylinder14")
+                                {
+                                    GameObject o = ch.gameObject;
+                                    o.GetComponent<Renderer>().enabled = false;
+                                }
                             }
                         }
                     }
