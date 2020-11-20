@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/PunBasics-Tutorial/Scenes/Random1.unity
+- path: Assets/PunBasics-Tutorial/Scenes/PunBasics-Launcher.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
